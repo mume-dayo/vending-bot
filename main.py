@@ -68,41 +68,6 @@ class VendingBot(commands.Bot):
         # ステータスを更新
         await self.update_status()
 
-        # 歓迎メッセージを送信
-        try:
-            # システムチャンネルまたは最初のテキストチャンネルを探す
-            welcome_channel = guild.system_channel
-            if not welcome_channel:
-                for channel in guild.text_channels:
-                    if channel.permissions_for(guild.me).send_messages:
-                        welcome_channel = channel
-                        break
-
-            if welcome_channel:
-                welcome_embed = discord.Embed(
-                    title="半自動販売機Botを追加いただき、ありがとうございます！",
-                    description=f"このBotは半自動販売機機能を提供します。\n\n"
-                               "**主な機能：**\n"
-                               "• 商品の管理\n"
-                               "• 購入システム\n"
-                               "• PayPay決済対応\n"
-                               "• 自動DM配送\n\n"
-                               "**設定方法：**\n"
-                               "1. `/vending_setup` で管理者チャンネルを設定\n"
-                               "2. `/add_product` で商品を追加\n"
-                               "3. `/add_inventory` で在庫を追加\n"
-                               "4. `/vending_panel` で販売機を設置\n\n"
-                               "詳細は `/help` をご確認ください。",
-                    color=get_random_color(),
-                    timestamp=discord.utils.utcnow()
-                )
-
-                await welcome_channel.send(embed=welcome_embed)
-                print(f'歓迎メッセージを {guild.name} に送信しました')
-
-        except Exception as e:
-            print(f'歓迎メッセージ送信エラー ({guild.name}): {e}')
-
     async def on_guild_remove(self, guild):
         """サーバーから退出した時の処理"""
         print(f'サーバーから退出しました: {guild.name} (ID: {guild.id})')
