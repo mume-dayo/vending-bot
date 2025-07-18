@@ -513,7 +513,7 @@ class PayPayLinkModal(discord.ui.Modal, title='決済リンク入力'):
 
     paypay_link = discord.ui.TextInput(
         label='決済リンクを入力してください',
-        placeholder='https://example.com/payment/link...',
+        placeholder='https://example.com/payment/link...,0円の場合はaaaaとでも入力してください',
         style=discord.TextStyle.long,
         required=True,
         max_length=500
@@ -523,7 +523,8 @@ class PayPayLinkModal(discord.ui.Modal, title='決済リンク入力'):
         paypay_link = self.paypay_link.value.strip()
 
         # 基本的なリンク形式の検証（URLの形式のみチェック）
-        if not paypay_link.startswith(('http://', 'https://')):
+        if not paypay_link.startswith(('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
+,)):
             await interaction.response.send_message(
                 "❌ 無効なリンクです。正しいURLを入力してください。",
                 ephemeral=True
