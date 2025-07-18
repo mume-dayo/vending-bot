@@ -179,7 +179,7 @@ async def add_product_slash(
         )
         return
 
-    if price < 1:
+    if price < 0:
         await interaction.response.send_message(
             "❌ 価格は1円以上で設定してください。",
             ephemeral=True
@@ -269,7 +269,7 @@ async def vending_panel_slash(
     panel_embed = discord.Embed(
         title="🏪 半自動販売機",
         description="購入したい商品を選択してください。\n"
-                   "購入後、PayPayリンクで決済し、確認後にDMで商品をお送りします。",
+                   "購入後、PayPayリンクを送ってもらって、確認後にDMで商品をお送りします。",
         color=get_random_color()
     )
 
@@ -289,11 +289,11 @@ async def vending_panel_slash(
     if achievement_channel:
         panel_embed.add_field(
             name="📈 実績チャンネル", 
-            value=f"購入実績が {achievement_channel.mention} に自動送信されます。",
+            value=f"購入実績が {achievement_channel.mention} に自動送信されるよ！。",
             inline=False
         )
 
-    panel_embed.set_footer(text="半自動販売機システム")
+    panel_embed.set_footer(text="半自動販売機")
 
     view = VendingMachineView(guild_id)
     await interaction.response.send_message(embed=panel_embed, view=view)
